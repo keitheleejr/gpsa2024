@@ -42,5 +42,3 @@ data <- read_dta("data/data.dta") |>
     !is.na(year),
     year >= 2000
   )
-
-write.csv(data, "data/data.csv")

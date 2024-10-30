@@ -1,4 +1,5 @@
 library(tidyverse)
+library(haven)
 
 data <- read_csv("data/data.csv") |>
   rename(
@@ -30,3 +31,4 @@ data <- read_csv("data/data.csv") |>
   )
 
 
+write.csv(data,"data.csv", row.names = FALSE, na = "")

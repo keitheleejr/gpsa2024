@@ -1,7 +1,9 @@
 library(tidyverse)
 library(haven)
 
-data <- read_csv("data/data.csv") |>
+source("scripts/getData.R")
+
+data <- data|> 
   rename(
     socmedmonitor = v2smgovsmmon,
     socmedsd = v2smgovsm,
@@ -28,7 +30,8 @@ data <- read_csv("data/data.csv") |>
     cybatt = cyberattacks_recode,
     ffrel = v2clrelig,
     polar = v2cacamps
-  )
+  ) 
+
+write.csv(data, "data/data.csv")
 
 
-write.csv(data,"data.csv", row.names = FALSE, na = "")

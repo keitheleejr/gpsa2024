@@ -1,0 +1,32 @@
+---
+title: Summary Stats
+format: pdf
+---
+
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+
+library(tidyverse)
+
+data <- read_csv("../data/data.csv") |>
+    select(-...1, -country, -country_text_id, -country_id, -year, -historical_date)
+
+summaryStats <- function(variable) {
+  summary(data[[variable]])
+}
+
+summary_stats <- list() 
+
+variables <- colnames(data)
+
+for (var in variables) {
+  summary_stats[[var]] <- summaryStats(var)
+}
+
+print(summary_stats)
+
+```

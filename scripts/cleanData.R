@@ -1,26 +1,20 @@
-library(tidyverse)
-library(haven)
-
-source("scripts/getData.R")
-
 data <- data|> 
   rename(
-    socmedmonitor = v2smgovsmmon,
-    socmedsd = v2smgovsm,
-    govintsd = v2smgovshut,
-    socmedalt = v2smgovsmalt,
-    contentreg = v2smregapp,
-    captoreg = v2smregcap,
-    intlegreg = v2smregcon,
-    intfilter = v2smgovfilprc,
-    cybseccap = v2smgovcapsec,
-    socmedcen = v2smgovsmcenprc,
-    fraction = v2smmefra,
-    harass = v2smhargr_nr,
-    orgoffviol = v2smorgviol,
-    avecituse = v2smorgavgact,
-    eliteuse = v2smorgelitact,
-    forgovdiss = v2smfordom,
+    socmedmonitor = v2smgovsmmon_osp,
+    socmedsd = v2smgovsm_osp,
+    govintsd = v2smgovshut_osp,
+    socmedalt = v2smgovsmalt_osp,
+    contentreg = v2smregapp_osp,
+    captoreg = v2smregcap_osp,
+    intlegreg = v2smregcon_osp,
+    intfilter = v2smgovfilprc_osp,
+    cybseccap = v2smgovcapsec_osp,
+    socmedcen = v2smgovsmcenprc_osp,
+    fraction = v2smmefra_osp,
+    orgoffviol = v2smorgviol_osp,
+    avecituse = v2smorgavgact_osp,
+    eliteuse = v2smorgelitact_osp,
+    forgovdiss = v2smfordom_osp,
     gdppc = wdi_gdpcapcon2015,
     gdpgr = wdi_gdpgr,
     inflation = wdi_inflation,
@@ -29,9 +23,5 @@ data <- data|>
     trade = wdi_trade,
     cybatt = cyberattacks_recode,
     ffrel = v2clrelig,
-    polar = v2cacamps
+    polar = v2smpolsoc_osp
   ) 
-
-write.csv(data, "data/data.csv")
-
-

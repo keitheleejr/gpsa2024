@@ -1,0 +1,64 @@
+---
+title: Exploratory TSA
+format: html
+execute: 
+    echo: false
+    message: false
+    warning: false
+---
+
+
+```{r, results = "asis"}
+
+source("../scripts/libraries.R")
+source("../scripts/getData.R")
+source("../scripts/cleanData.R")
+
+# Function to fit models and output results
+fit_models_and_output <- function(data, variable) {
+  filtered_data <- data |>
+    filter(
+      !is.na(.data[[variable]])
+    )
+  
+  formula <- as.formula(paste("log_ter_dom_pcap ~ ", variable, "+ gdpgr + polar + avecituse"))
+  
+  fe <- plm(formula, data = filtered_data, index = c("country_id", "year"))
+#  re <- plm(formula, data = filtered_data, index = c("country_id", "year"), model = "random")
+
+  
+  # Robust standard errors
+#  fe_robust <- coeftest(fe, vcov = vcovHC(fe, type = "HC1"))
+#  re_robust <- coeftest(re, vcov = vcovHC(re, type = "HC1"))
+  
+  stargazer(fe, type = "html", title = paste("Results for", variable))
+}
+
+# Get the column names of the data
+variables <- c(
+  "socmedmonitor",
+  "socmedsd",
+  "govintsd",
+  "socmedalt",
+  "contentreg",
+  "captoreg",
+  "intlegreg",
+  "intfilter",
+  "cybseccap",
+  "socmedcen",
+  "fraction",
+  "orgoffviol",
+  "avecituse",
+  "eliteuse",
+  "forgovdiss"
+)
+
+# Loop through each variable and apply the function
+for (var in variables) {
+  fit_models_and_output(data, var)
+}
+
+
+
+
+```
